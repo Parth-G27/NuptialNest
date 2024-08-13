@@ -1,8 +1,8 @@
-// http://localhost:3000/api/apiAddReview
+// http://localhost:8000/
 
 import axios from "axios";
 
-const reviewsUrl = 'http://localhost:3000/api/apiAddReview';
+const reviewsUrl = 'http://localhost:8000';
 
 export const apiAddReviews = async (data) => {
     try {
