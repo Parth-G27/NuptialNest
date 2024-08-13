@@ -1,8 +1,11 @@
 import express from 'express';
 import Connection from './database/db.js';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
+
 dotenv.config();
 
 const PORT = 8000;
