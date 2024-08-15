@@ -33,7 +33,7 @@ const AddReview = () => {
     const addReviewDetails = async() => {
         await apiAddReviews(review);
         console.log(review)
-        // navigate('/all');
+        
     }
 
     return (
@@ -43,14 +43,12 @@ const AddReview = () => {
                 <InputLabel htmlFor="my-input">Name</InputLabel>
                 <Input onChange={(e) => onValueChange(e)} name='name' value={name} id="my-input" />
             </FormControl>
-            {/* <FormControl>
-                <InputLabel htmlFor="my-input">reviewname</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name='reviewname' value={reviewname} id="my-input" />
-            </FormControl> */}
+           
             <FormControl>
                 <InputLabel htmlFor="my-input">Email ID</InputLabel>
                 <Input onChange={(e) => onValueChange(e)} name='email' value={email} id="my-input"/>
             </FormControl>
+
             <FormControl>
                 <InputLabel htmlFor="my-input">Your Review</InputLabel>
                 <Input onChange={(e) => onValueChange(e)} name='user_review' value={user_review} id="my-input" />
