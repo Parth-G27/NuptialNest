@@ -9,7 +9,7 @@ import { apiAddReviews } from '../api/apiAddReview/route';
 const initialValue = {
     name: '',
     email: '',
-    thereview: ''
+    user_review: ''
 }
 
 const Container = styled(FormGroup)`
@@ -23,7 +23,7 @@ const AddReview = () => {
 
 
     const [review, setreview] = useState(initialValue);
-    const { name, email, thereview } = review;
+    const { name, email, user_review } = review;
     
 
     const onValueChange = (e) => {
@@ -52,8 +52,8 @@ const AddReview = () => {
                 <Input onChange={(e) => onValueChange(e)} name='email' value={email} id="my-input"/>
             </FormControl>
             <FormControl>
-                <InputLabel htmlFor="my-input">Review</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name='thereview' value={thereview} id="my-input" />
+                <InputLabel htmlFor="my-input">Your Review</InputLabel>
+                <Input onChange={(e) => onValueChange(e)} name='user_review' value={user_review} id="my-input" />
             </FormControl>
 
             <FormControl>

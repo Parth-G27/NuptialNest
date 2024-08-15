@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 
-const Connection = async (username, password) => {
-    const URI = `mongodb+srv://${username}:${password}@cluster1.sqvug29.mongodb.net/`;
+const Connection = async (username, password, dbName) => {
+    const URI = `mongodb+srv://${username}:${password}@cluster1.sqvug29.mongodb.net/${dbName}?retryWrites=true&w=majority`;
     try {
         await mongoose.connect(URI);
         console.log("database connection done");
