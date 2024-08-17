@@ -29,12 +29,7 @@ const TRow = styled(TableRow)`
 const AllUsers = () => {
     const [users, setUsers] = useState([]);
 
-    const user = {
-        _id : 45,
-        name : "Yam",
-        email : "yam@gmail.com",
-        phone : "3893893003"
-    }
+
     
     useEffect(() => {
         getAllReviews();
@@ -48,10 +43,7 @@ const AllUsers = () => {
     // }
 
     const getAllReviews = async () => {
-        console.log("in the getallreviews func.");
-        await apiAllReviews();
-        // await apiAddReviews(review);
-    
+        await apiAllReviews();    
     }
 
     return (
@@ -77,7 +69,7 @@ const AllUsers = () => {
                         <TableCell>
                             <Button color="primary" variant="contained" style={{marginRight:10}} component={Link} to={`/edit/${user._id}`}>Edit</Button> {/* change it to user.id to use JSON Server */}
                             <Button color="secondary" variant="contained" onClick={() => deleteUserData(user._id)}>Delete</Button> {/* change it to user.id to use JSON Server */}
-                            <button onClick={() => getAllReviews()}>Sub</button>
+            
                         </TableCell>
                     </TRow>
                 ))}

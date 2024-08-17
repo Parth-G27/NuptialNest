@@ -23,9 +23,13 @@ router.post('/add', async (req, res) => {
 
 router.post('/all', async (req, res) => {
 
-    const review = req.body;
-    console.log(review);
-    res.status(201).json("Route /all here");
+    try {
+
+        const reviews = await Review.find({});
+
+    } catch (error) {
+        
+    }
     
 
   
