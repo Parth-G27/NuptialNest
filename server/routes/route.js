@@ -21,4 +21,14 @@ router.post('/add', async (req, res) => {
     }
 })
 
+router.post('/all', async (req, res) => {
+
+    const review = req.body;
+    console.log(review);
+    res.status(201).json("Route /all here");
+    
+
+  
+})
+
 export default router;

@@ -12,10 +12,3 @@ export const apiAddReviews = async (data) => {
     }
 }
 
-export const getAllReviews = async () => {
-    try {
-        return await axios.post(`${reviewsUrl}/all`) 
-    } catch (error) {
-        console.log("Error while calling get all reviews API", error);
-    }
-}
