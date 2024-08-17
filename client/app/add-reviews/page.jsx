@@ -15,6 +15,7 @@ import {
 import { styled } from '@mui/system';
 import { Send as SendIcon, Star as StarIcon } from '@mui/icons-material';
 import { apiAddReviews } from '../api/apiAddReview/route';
+import { useRouter } from 'next/navigation'; 
 
 // Create a custom theme
 const theme = createTheme({
@@ -82,6 +83,8 @@ const AddReview = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const router = useRouter();
+
   const onValueChange = (e) => {
     setReview({ ...review, [e.target.name]: e.target.value });
   };
@@ -98,6 +101,7 @@ const AddReview = () => {
     setReview(initialValue);
     setIsSubmitting(false);
     setSnackbarOpen(true);
+    router.push('/all-reviews');
   };
 
   return (
