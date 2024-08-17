@@ -11,3 +11,11 @@ export const apiAddReviews = async (data) => {
         console.log("Error while calling add review API", error);
     }
 }
+
+export const getAllReviews = async () => {
+    try {
+        return await axios.post(`${reviewsUrl}/all`) 
+    } catch (error) {
+        console.log("Error while calling get all reviews API", error);
+    }
+}
