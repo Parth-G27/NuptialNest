@@ -68,7 +68,6 @@ const NavBar = () => {
   const pathname = usePathname();
 
   const navLinks = [
-    { name: 'Nuptial Nest', href: '/' },
     { name: 'All Reviews', href: '/all-reviews' },
     { name: 'Add Review', href: '/add-reviews' },
   ];
