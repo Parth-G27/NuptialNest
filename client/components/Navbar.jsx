@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box, Button, useScrollTrigger, Slide, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Button, useMediaQuery, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -41,6 +41,7 @@ const NavLinksContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
+// Adjust the styled component to handle `active` correctly
 const StyledNavLink = styled(Button)(({ theme, active }) => ({
   color: '#FFFFFF',
   fontSize: '1rem',
@@ -91,7 +92,7 @@ const NavBar = () => {
             <Link href={link.href} key={link.name} passHref legacyBehavior>
               <StyledNavLink
                 component="a"
-                active={pathname === link.href }
+                active={pathname === link.href ? 1 : 0} // Passing 1 (true) or 0 (false) as a custom prop
               >
                 {link.name}
               </StyledNavLink>

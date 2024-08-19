@@ -25,7 +25,7 @@ router.get('/all', async (req, res) => {
 
     try {
 
-        const reviews = await Review.find({});
+        const reviews = await Review.find({}).sort({ reviewId: -1 });
         res.status(200).json(reviews)
 
     } catch (error) {
