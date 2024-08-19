@@ -43,13 +43,14 @@ const ResponsiveTextField = styled(TextField)`
     }
   }
 `;
+const initialValue = {
+  name: '',
+  email: '',
+  user_review: ''
+};
 
 const ResponsiveForm = ({ params }) => {
-  const [updatedReview, setUpdatedReview] = useState({
-    name: '',
-    email: '',
-    user_review: ''
-  });
+  const [updatedReview, setUpdatedReview] = useState(initialValue);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -47,26 +47,7 @@ const AllUsers = () => {
         setreviews(response.data);
     }
 
-    const blogPosts = [
-        {
-          category: 'Category',
-          date: '24 JAN, 2020',
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          description: 'Suspendisse aliquam tellus ante, porttitor mattis diam eleifend quis. Pellentesque pulvinar commodo eros sit amet finibus. Aenean et ornare erat.',
-        },
-        {
-          category: 'Category',
-          date: '24 JAN, 2020',
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          description: 'Suspendisse aliquam tellus ante, porttitor mattis diam eleifend quis. Pellentesque pulvinar commodo eros sit amet finibus. Aenean et ornare erat.',
-        },
-        {
-          category: 'Category',
-          date: '24 JAN, 2020',
-          title: 'Lorem ipsum dolor sit amet consectetur.',
-          description: 'Suspendisse aliquam tellus ante, porttitor mattis diam eleifend quis. Pellentesque pulvinar commodo eros sit amet finibus. Aenean et ornare erat.',
-        },
-      ];
+
 
     return (
         // <StyledTable>
