@@ -36,11 +36,21 @@ router.put('/edit', async (req, res) => {
 
     try {
 
+        console.log(req.body);
+        const updatedReview = req.body;
+        const ID = updatedReview.reviewId;
+        const newName = updatedReview.name;
+        const newEmail = updatedReview.email;
+        const newUserReview = updatedReview.user_review;
+
         await Review.updateOne(
-            { reviewId: 6 }, // Filter criteria
-            { $set: { name: "New Name" } } // Update operation
+            { reviewId: ID }, // Filter criteria
+            { $set: { name: newName,
+                      email: newEmail,
+                      user_review : newUserReview
+             } } // Update operation
          )
-        res.status(200).json("Done. Edit");
+        res.status(200).json("Edit working. x2");
 
     } catch (error) {
         res.status(404).json({ message: error.message});

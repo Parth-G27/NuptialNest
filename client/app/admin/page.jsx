@@ -39,6 +39,8 @@ const AllUsers = () => {
         // Code to delete the review
     };
 
+   
+
     return (
         <StyledTable>
             <TableHead>
@@ -51,15 +53,15 @@ const AllUsers = () => {
                 </THead>
             </TableHead>
             <TableBody>
-                {reviews.map((review) => (
-                    <TRow key={review.id}>
+                {reviews.map((review,index) => (
+                    <TRow key={index}>
                         <TableCell>{review.reviewId}</TableCell>
                         <TableCell>{review.name}</TableCell>
                         <TableCell>{review.email}</TableCell>
                         <TableCell>{review.user_review}</TableCell>
                         <TableCell>
                             <Link href={`/edit/${review.reviewId}`} passHref>
-                                <Button color="primary" variant="contained" style={{ marginRight: 10 }}>Edit</Button>
+                                <Button color="primary" variant="contained" style={{ marginRight: 10 }}  >Edit</Button>
                             </Link>
                             <Button color="secondary" variant="contained" onClick={() => deleteUserData(review._id)}>Delete</Button>
                         </TableCell>

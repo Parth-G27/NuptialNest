@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { TextField, Button, Container, Paper, Typography, Box, styled } from '@mui/material';
+import { apiEditReviews } from '@/app/api/apiEditReview/route';
 
 const StyledContainer = styled(Container)`
   display: flex;
@@ -43,13 +44,17 @@ const ResponsiveTextField = styled(TextField)`
     }
   }
 `;
-const initialValue = {
-  name: '',
-  email: '',
-  user_review: ''
-};
+
+
 
 const ResponsiveForm = ({ params }) => {
+  const initialValue = {
+    reviewId: params.id,
+    name: '',
+    email: '',
+    user_review: '',
+  };
+
   const [updatedReview, setUpdatedReview] = useState(initialValue);
 
   const handleChange = (e) => {
@@ -60,11 +65,15 @@ const ResponsiveForm = ({ params }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     console.log(updatedReview);
+
+    await apiEditReviews(updatedReview);
   };
+
+  
 
   return (
     <StyledContainer>
