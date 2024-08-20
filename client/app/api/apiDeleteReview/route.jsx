@@ -2,12 +2,10 @@ import axios from "axios";
 
 const reviewsUrl = 'http://localhost:8000';
 
-export const apiDeleteReviews = async (data) => {
+export const apiDeleteReviews = async (id) => {
     try {
-        console.log("Trying /del", data);
-        return await axios.delete(`${reviewsUrl}/de`, {
-            data: data // Include the body data here
-        }); 
+        return await axios.delete(`${reviewsUrl}/del/${id}`);
+       
     } catch (error) {
         console.log("Error while calling get delete API", error);
     }
