@@ -58,4 +58,24 @@ router.put('/edit', async (req, res) => {
     
 })
 
+router.delete('/delete', async (req, res) => {
+
+    try {
+
+        const message = req.body;
+        const delID = message.Id;
+        const result = await Review.deleteOne({ reviewId: delID });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: "No review found with the given ID" });
+        }
+
+        res.status(200).json({ message: "Review deleted successfully" });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message});
+    }
+    
+})
+
 export default router;

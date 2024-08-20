@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableCell, Paper, TableRow, TableBody, Button, styled, useMediaQuery, useTheme, Box, Typography } from '@mui/material';
 import { apiAllReviews } from '../api/apiAllReview/route';
-import Link from 'next/link';  // Use Next.js Link
+import { apiDeleteReviews } from '../api/apiDeleteReview/route'; // Ensure correct import
+import Link from 'next/link';
 
-// Styled components for responsiveness
 const StyledTable = styled(Table)(({ theme }) => ({
     width: '90%',
     margin: '50px auto',
@@ -37,7 +37,7 @@ const ReviewText = styled(Typography)(({ theme }) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    maxWidth: '500px',  // Control max-width based on design
+    maxWidth: '500px',
     [theme.breakpoints.down('sm')]: {
         maxWidth: '100px',
     },
@@ -58,7 +58,9 @@ const AllUsers = () => {
     };
 
     const deleteUserData = async (id) => {
-        // Code to delete the review
+        const delDetail = { Id: id };
+        await apiDeleteReviews(delDetail); // Ensure correct function call
+        getAllReviews(); // Optionally refetch data to update the table after deletion
     };
 
     return (
@@ -88,7 +90,7 @@ const AllUsers = () => {
                                         Edit
                                     </Button>
                                 </Link>
-                                <Button color="secondary" variant="contained" onClick={() => deleteUserData(review._id)}>
+                                <Button color="secondary" variant="contained" onClick={() => deleteUserData(review.reviewId)}>
                                     Delete
                                 </Button>
                             </Box>
