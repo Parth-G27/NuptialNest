@@ -35,12 +35,7 @@ const AllUsers = () => {
         getAllReviews();
     }, []);
 
-    // Empty Array in useEffect means component-did-mount
-
-    // const deleteUserData = async (id) => {
-    //     await deleteUser(id);
-    //     getAllUsers();
-    // }
+    
 
     const getAllReviews = async () => {
         let response = await apiAllReviews();   
@@ -50,35 +45,7 @@ const AllUsers = () => {
 
 
     return (
-        // <StyledTable>
-        //     <TableHead>
-        //         <THead>
-        //             <TableCell>Id</TableCell>
-        //             <TableCell>Name</TableCell>
-                  
-        //             <TableCell>Email</TableCell>
-        //             <TableCell>Review</TableCell>
-        //             <TableCell></TableCell>
-        //         </THead>
-        //     </TableHead>
-        //     <TableBody>
-        //         {reviews.map((review) => (
-        //             <TRow key={review.id}>
-        //                 <TableCell>{review.reviewId}</TableCell> {/* change it to review.id to use JSON Server */}
-        //                 <TableCell>{review.name}</TableCell>
- 
-        //                 <TableCell>{review.email}</TableCell>
-        //                 <TableCell>{review.user_review}</TableCell>
-        //                 <TableCell>
-        //                     <Button color="primary" variant="contained" style={{marginRight:10}}>Edit</Button> 
-        //                     <Button color="secondary" variant="contained" onClick={() => deleteUserData(review._id)}>Delete</Button> 
-            
-        //                 </TableCell>
-        //             </TRow>
-        //         ))}
-                
-        //     </TableBody>
-        // </StyledTable>
+        
         <>
         <Box sx={{ maxWidth: 800, margin: 'auto', padding: 2 }}>
       {reviews.map((review, index) => (
