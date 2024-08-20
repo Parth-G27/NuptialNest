@@ -1,9 +1,11 @@
 import axios from "axios";
 
-const reviewsUrl = 'http://localhost:8000';
+
 
 export const apiDeleteReviews = async (id) => {
     try {
+        const reviewsUrl = process.env.NEXT_PUBLIC_API_KEY;
+        
         return await axios.delete(`${reviewsUrl}/del/${id}`);
        
     } catch (error) {
