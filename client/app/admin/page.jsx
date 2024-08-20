@@ -58,8 +58,8 @@ const AllUsers = () => {
     };
 
     const deleteUserData = async (id) => {
-        const delDetail = { Id: id };
-        await apiDeleteReviews(delDetail); // Ensure correct function call
+       
+        await apiDeleteReviews(id); // Ensure correct function call
         getAllReviews(); // Optionally refetch data to update the table after deletion
     };
 
