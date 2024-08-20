@@ -1,45 +1,65 @@
 "use client";
-import react, { useState, useEffect } from 'react';
-import { Table, TableHead, TableCell, Paper, TableRow, TableBody, Button, styled } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Table, TableHead, TableCell, Paper, TableRow, TableBody, Button, styled, useMediaQuery, useTheme, Box, Typography } from '@mui/material';
 import { apiAllReviews } from '../api/apiAllReview/route';
 import Link from 'next/link';  // Use Next.js Link
 
-const StyledTable = styled(Table)`
-    width: 90%;
-    margin: 50px 0 0 50px;
-`;
+// Styled components for responsiveness
+const StyledTable = styled(Table)(({ theme }) => ({
+    width: '90%',
+    margin: '50px auto',
+    [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        margin: '20px 0',
+    }
+}));
 
 const THead = styled(TableRow)`
     & > th {
         font-size: 20px;
         background: #000000;
         color: #FFFFFF;
+        text-align: center;
     }
 `;
 
-const TRow = styled(TableRow)`
-    & > td{
-        font-size: 18px;
+const TRow = styled(TableRow)(({ theme }) => ({
+    '& > td': {
+        fontSize: '18px',
+        textAlign: 'center',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '16px',
+        },
     }
-`;
+}));
+
+const ReviewText = styled(Typography)(({ theme }) => ({
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    maxWidth: '500px',  // Control max-width based on design
+    [theme.breakpoints.down('sm')]: {
+        maxWidth: '100px',
+    },
+}));
 
 const AllUsers = () => {
     const [reviews, setReviews] = useState([]);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     useEffect(() => {
         getAllReviews();
     }, []);
 
     const getAllReviews = async () => {
-        let response = await apiAllReviews();   
+        let response = await apiAllReviews();
         setReviews(response.data);
     };
 
     const deleteUserData = async (id) => {
         // Code to delete the review
     };
-
-   
 
     return (
         <StyledTable>
@@ -49,21 +69,29 @@ const AllUsers = () => {
                     <TableCell>Name</TableCell>
                     <TableCell>Email</TableCell>
                     <TableCell>Review</TableCell>
-                    <TableCell></TableCell>
+                    <TableCell>Actions</TableCell>
                 </THead>
             </TableHead>
             <TableBody>
-                {reviews.map((review,index) => (
+                {reviews.map((review, index) => (
                     <TRow key={index}>
                         <TableCell>{review.reviewId}</TableCell>
                         <TableCell>{review.name}</TableCell>
                         <TableCell>{review.email}</TableCell>
-                        <TableCell>{review.user_review}</TableCell>
                         <TableCell>
-                            <Link href={`/edit/${review.reviewId}`} passHref>
-                                <Button color="primary" variant="contained" style={{ marginRight: 10 }}  >Edit</Button>
-                            </Link>
-                            <Button color="secondary" variant="contained" onClick={() => deleteUserData(review._id)}>Delete</Button>
+                            <ReviewText title={review.user_review}>{review.user_review}</ReviewText>
+                        </TableCell>
+                        <TableCell>
+                            <Box display="flex" justifyContent="center" alignItems="center" gap={isMobile ? '0.5rem' : '1rem'}>
+                                <Link href={`/edit/${review.reviewId}`} passHref>
+                                    <Button color="primary" variant="contained" style={{ marginRight: isMobile ? 5 : 10 }}>
+                                        Edit
+                                    </Button>
+                                </Link>
+                                <Button color="secondary" variant="contained" onClick={() => deleteUserData(review._id)}>
+                                    Delete
+                                </Button>
+                            </Box>
                         </TableCell>
                     </TRow>
                 ))}
