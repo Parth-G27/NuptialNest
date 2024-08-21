@@ -26,7 +26,7 @@ const TRow = styled(TableRow)`
     }
 `;
 
-const AllUsers = () => {
+const AllReviews = () => {
     const [reviews, setreviews] = useState([])
 
 
@@ -109,4 +109,4 @@ const AllUsers = () => {
     )
 }
 
-export default AllUsers;
+export default AllReviews;
