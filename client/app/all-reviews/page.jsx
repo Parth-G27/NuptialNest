@@ -1,112 +1,156 @@
 "use client";
-import react, { useState, useEffect } from 'react';
-
-import { Table, TableHead, TableCell, Paper, TableRow, TableBody, Button, styled, Card, CardContent, Chip, Box, Typography } from '@mui/material'
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Card, CardContent, Avatar, Button, styled } from '@mui/material';
 import { apiAllReviews } from '../api/apiAllReview/route';
-import { ArrowForward } from '@mui/icons-material';
+import { ArrowForward, Email } from '@mui/icons-material';
 
-import { Link } from 'react-router-dom';
+// GradientBox styling for background
+const GradientBox = styled(Box)({
+  padding: '20px',
+  background: '#f0f4f8',
+  minHeight: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column', // Stack the items vertically
+});
 
-const StyledTable = styled(Table)`
-    width: 90%;
-    margin: 50px 0 0 50px;
-`;
+// StyledCard with full width
+const StyledCard = styled(Card)(({ theme }) => ({
+  margin: '10px 0',
+  padding: '10px',
+  width: '100%', // Full width
+  maxWidth: '900px', // Limit the width on larger screens
+  background: 'linear-gradient(to right, #ffffff, #f2faff)',
+  borderRadius: '15px',
+  boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)',
+  border: '1px solid rgba(255, 182, 193, 0.3)',
+  [theme.breakpoints.down('sm')]: {
+    padding: '8px',
+    borderRadius: '10px',
+  },
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+}));
 
-const THead = styled(TableRow)`
-    & > th {
-        font-size: 20px;
-        background: #000000;
-        color: #FFFFFF;
-    }
-`;
+const UserDetails = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  marginBottom: '10px',
+});
 
-const TRow = styled(TableRow)`
-    & > td{
-        font-size: 18px
-    }
-`;
+const UserName = styled(Typography)({
+  fontSize: '18px',
+  fontWeight: 'bold',
+  color: '#0d47a1',
+  marginLeft: '0px',
+  '@media (max-width: 600px)': {
+    fontSize: '16px',
+  },
+});
+
+const EmailText = styled(Typography)({
+  fontSize: '14px',
+  color: '#546e7a',
+  marginLeft: '10px',
+  '@media (max-width: 600px)': {
+    fontSize: '12px',
+  },
+});
+
+const ReviewText = styled(Typography)({
+  fontSize: '16px',
+  color: '#37474f',
+  lineHeight: 1.5,
+  margin: '10px 0',
+  paddingLeft: '12px',
+  borderLeft: '4px solid #2196f3',
+  '@media (max-width: 600px)': {
+    fontSize: '12px',
+    paddingLeft: '6px',
+  },
+});
+
+const ReadMoreButton = styled(Button)({
+  color: '#1e88e5',
+  fontWeight: 'bold',
+  '&:hover': {
+    backgroundColor: 'transparent',
+    transform: 'translateY(-3px)',
+    transition: '0.2s',
+  },
+});
+
+const ReviewButton = styled(Button)(({ theme }) => ({
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
+  backgroundColor: '#1e88e5',
+  color: '#fff',
+  fontWeight: 'bold',
+  borderRadius: '20px',
+  padding: '5px 15px',
+  fontSize: '12px',
+  '&:hover': {
+    backgroundColor: '#1565c0',
+  },
+  '@media (max-width: 600px)': {
+    padding: '2px 5px',
+    fontSize: '10px',
+  },
+}));
 
 const AllReviews = () => {
-    const [reviews, setreviews] = useState([])
+  const [reviews, setReviews] = useState([]);
 
+  useEffect(() => {
+    getAllReviews();
+  }, []);
 
-    
-    useEffect(() => {
-        getAllReviews();
-    }, []);
+  const getAllReviews = async () => {
+    let response = await apiAllReviews();
+    setReviews(response.data);
+  };
 
-    
-
-    const getAllReviews = async () => {
-        let response = await apiAllReviews();   
-        setreviews(response.data);
-    }
-
-
-
-    return (
-        
-        <>
-        <Box sx={{ maxWidth: 800, margin: 'auto', padding: 2 }}>
+  return (
+    <GradientBox>
+      <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#1e88e5', fontWeight: 'bold', marginBottom: 2, marginTop: 4 }}>
+        All Reviews
+      </Typography>
       {reviews.map((review, index) => (
-        <Card key={index} sx={{ marginBottom: 4, boxShadow: 'none', border: '1px solid #e0e0e0' }}>
-          <CardContent>
-            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 1 }}>
-              <Chip
-                label={review.email}
-                size="small"
-                sx={{
-                  backgroundColor: '#3f51b5',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  marginRight: 1,
-                }}
-              />
-              <Typography variant="caption" color="text.secondary">
-                {review.reviewId}
-              </Typography>
-            </Box>
-            <Typography variant="h5" component="div" gutterBottom>
-              {review.name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" paragraph>
-              {review.user_review}
-            </Typography>
-            <Button
-              endIcon={<ArrowForward />}
-              sx={{
-                color: '#ffa726',
-                padding: 0,
-                '&:hover': {
-                  backgroundColor: 'transparent',
-                },
-              }}
-            >
-              READ MORE
-            </Button>
-          </CardContent>
-        </Card>
-      ))}
-      {/* <Box sx={{ textAlign: 'center', marginTop: 4 }}>
-        <Button
-          variant="outlined"
-          sx={{
-            borderColor: '#3f51b5',
-            color: '#3f51b5',
-            '&:hover': {
-              borderColor: '#3f51b5',
-              backgroundColor: 'rgba(63, 81, 181, 0.04)',
-            },
-          }}
-        >
-          SEE ALL ARTICLES
-        </Button>
-      </Box> */}
-    </Box>
+        <StyledCard key={index}>
+          <Box position="relative">
+            <ReviewButton>Review #{review.reviewId}</ReviewButton>
+            <CardContent >
+              <UserDetails>
+                <Avatar sx={{ bgcolor: '#64b5f6' }}>{review.name.charAt(0).toUpperCase()}</Avatar>
+                <Box ml={2}>
+                  <UserName>{review.name}</UserName>
+                  {/* <EmailText>
+                    <Email sx={{ fontSize: '16px', marginRight: '5px' }} />
+                    {review.email}
+                  </EmailText> */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 0.5 }}>
+                      <Email fontSize="small" sx={{ color: 'text.secondary', marginRight: 0.5 }} />
+                      <Typography variant="body2" color="text.secondary">
+                        {review.email}
+                      </Typography>
+                    </Box>
+                </Box>
+              </UserDetails>
 
-        </>
-        
-    )
-}
+              <ReviewText>"{review.user_review}"</ReviewText>
+
+              <Box display="flex" justifyContent="flex-end" alignItems="center">
+                <ReadMoreButton endIcon={<ArrowForward />}>READ MORE</ReadMoreButton>
+              </Box>
+            </CardContent>
+          </Box>
+        </StyledCard>
+      ))}
+    </GradientBox>
+  );
+};
 
 export default AllReviews;

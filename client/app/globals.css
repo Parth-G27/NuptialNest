@@ -100,6 +100,10 @@ a {
   text-decoration: none;
 }
 
+.MuiCardContent-root:last-child {
+  padding-bottom : 0 !important;
+}
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -44,7 +44,7 @@ const UserName = styled(Typography)({
   fontSize: '18px',
   fontWeight: 'bold',
   color: '#0d47a1',
-  marginLeft: '10px',
+  marginLeft: '0px',
   '@media (max-width: 600px)': {
     fontSize: '16px',
   },
@@ -67,8 +67,8 @@ const ReviewText = styled(Typography)({
   paddingLeft: '12px',
   borderLeft: '4px solid #2196f3',
   '@media (max-width: 600px)': {
-    fontSize: '14px',
-    paddingLeft: '8px',
+    fontSize: '12px',
+    paddingLeft: '6px',
   },
 });
 
@@ -91,13 +91,13 @@ const ReviewButton = styled(Button)(({ theme }) => ({
   fontWeight: 'bold',
   borderRadius: '20px',
   padding: '5px 15px',
-  fontSize: '14px',
+  fontSize: '12px',
   '&:hover': {
     backgroundColor: '#1565c0',
   },
   '@media (max-width: 600px)': {
-    padding: '4px 10px',
-    fontSize: '12px',
+    padding: '2px 5px',
+    fontSize: '10px',
   },
 }));
 
@@ -122,7 +122,7 @@ const AllReviews = () => {
         <StyledCard key={index}>
           <Box position="relative">
             <ReviewButton>Review #{review.reviewId}</ReviewButton>
-            <CardContent>
+            <CardContent >
               <UserDetails>
                 <Avatar sx={{ bgcolor: '#64b5f6' }}>{review.name.charAt(0).toUpperCase()}</Avatar>
                 <Box ml={2}>
