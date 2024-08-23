@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Card, CardContent, Avatar, Button, Grid, styled } from '@mui/material';
+import { Box, Typography, Card, CardContent, Avatar, Button, styled } from '@mui/material';
 import { apiAllReviews } from '../api/apiAllReview/route';
 import { ArrowForward, Email } from '@mui/icons-material';
 
@@ -12,23 +12,27 @@ const GradientBox = styled(Box)({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  flexDirection: 'column', // Stack the items vertically
 });
 
-// StyledCard with responsive width and fixed size
+// StyledCard with full width
 const StyledCard = styled(Card)(({ theme }) => ({
-    margin: '10px 0',
-    padding: '10px',
-    width: '100%', // Responsive width
-    maxWidth: '900px', // Set a maximum width for large screens
-    background: 'linear-gradient(to right, #ffffff, #f2faff)',
-    borderRadius: '15px',
-    boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)',
-    border: '1px solid rgba(255, 182, 193, 0.3)',
-    [theme.breakpoints.down('sm')]: {
-      padding: '8px',
-      borderRadius: '10px',
-    },
-  }));
+  margin: '10px 0',
+  padding: '10px',
+  width: '100%', // Full width
+  maxWidth: '900px', // Limit the width on larger screens
+  background: 'linear-gradient(to right, #ffffff, #f2faff)',
+  borderRadius: '15px',
+  boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)',
+  border: '1px solid rgba(255, 182, 193, 0.3)',
+  [theme.breakpoints.down('sm')]: {
+    padding: '8px',
+    borderRadius: '10px',
+  },
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+}));
 
 const UserDetails = styled(Box)({
   display: 'flex',
@@ -78,7 +82,7 @@ const ReadMoreButton = styled(Button)({
   },
 });
 
-const ReviewButton = styled(Button)({
+const ReviewButton = styled(Button)(({ theme }) => ({
   position: 'absolute',
   top: '10px',
   right: '10px',
@@ -95,7 +99,7 @@ const ReviewButton = styled(Button)({
     padding: '4px 10px',
     fontSize: '12px',
   },
-});
+}));
 
 const AllReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -111,39 +115,40 @@ const AllReviews = () => {
 
   return (
     <GradientBox>
-        
-      <Grid container spacing={2} justifyContent="center" direction="column" alignItems="center">
       <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#1e88e5', fontWeight: 'bold', marginBottom: 2, marginTop: 4 }}>
         All Reviews
       </Typography>
-        {reviews.map((review, index) => (
-          <Grid item xs={12} key={index}>
-            <StyledCard>
-              <Box position="relative">
-                <ReviewButton>Review #{review.reviewId}</ReviewButton>
-                <CardContent>
-                  <UserDetails>
-                    <Avatar sx={{ bgcolor: '#64b5f6' }}>{review.name.charAt(0).toUpperCase()}</Avatar>
-                    <Box ml={2}>
-                      <UserName>{review.name}</UserName>
-                      <EmailText>
-                        <Email sx={{ fontSize: '16px', marginRight: '5px' }} />
+      {reviews.map((review, index) => (
+        <StyledCard key={index}>
+          <Box position="relative">
+            <ReviewButton>Review #{review.reviewId}</ReviewButton>
+            <CardContent>
+              <UserDetails>
+                <Avatar sx={{ bgcolor: '#64b5f6' }}>{review.name.charAt(0).toUpperCase()}</Avatar>
+                <Box ml={2}>
+                  <UserName>{review.name}</UserName>
+                  {/* <EmailText>
+                    <Email sx={{ fontSize: '16px', marginRight: '5px' }} />
+                    {review.email}
+                  </EmailText> */}
+                  <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 0.5 }}>
+                      <Email fontSize="small" sx={{ color: 'text.secondary', marginRight: 0.5 }} />
+                      <Typography variant="body2" color="text.secondary">
                         {review.email}
-                      </EmailText>
+                      </Typography>
                     </Box>
-                  </UserDetails>
+                </Box>
+              </UserDetails>
 
-                  <ReviewText>"{review.user_review}"</ReviewText>
+              <ReviewText>"{review.user_review}"</ReviewText>
 
-                  <Box display="flex" justifyContent="flex-end" alignItems="center">
-                    <ReadMoreButton endIcon={<ArrowForward />}>READ MORE</ReadMoreButton>
-                  </Box>
-                </CardContent>
+              <Box display="flex" justifyContent="flex-end" alignItems="center">
+                <ReadMoreButton endIcon={<ArrowForward />}>READ MORE</ReadMoreButton>
               </Box>
-            </StyledCard>
-          </Grid>
-        ))}
-      </Grid>
+            </CardContent>
+          </Box>
+        </StyledCard>
+      ))}
     </GradientBox>
   );
 };
