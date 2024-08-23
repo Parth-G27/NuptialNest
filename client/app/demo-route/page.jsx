@@ -112,12 +112,16 @@ const AllReviews = () => {
 
   return (
     <GradientBox>
+        
       <Grid container spacing={2} justifyContent="center" direction="column" alignItems="center">
+      <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#1e88e5', fontWeight: 'bold', marginBottom: 2, marginTop: 4 }}>
+        All Reviews
+      </Typography>
         {reviews.map((review, index) => (
           <Grid item xs={12} key={index}>
             <StyledCard>
               <Box position="relative">
-                <ReviewButton>Review #{index + 1}</ReviewButton>
+                <ReviewButton>Review #{review.reviewId}</ReviewButton>
                 <CardContent>
                   <UserDetails>
                     <Avatar sx={{ bgcolor: '#64b5f6' }}>{review.name.charAt(0).toUpperCase()}</Avatar>
