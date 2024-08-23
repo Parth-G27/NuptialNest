@@ -16,20 +16,19 @@ const GradientBox = styled(Box)({
 
 // StyledCard with responsive width and fixed size
 const StyledCard = styled(Card)(({ theme }) => ({
-  margin: '10px 0',
-  padding: '10px',
-  width: '900px', // Responsive width
-  maxWidth: '900px', // Set a maximum width for large screens
-  background: 'linear-gradient(to right, #ffffff, #f2faff)',
-  borderRadius: '15px',
-  boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)',
-  border: '1px solid rgba(255, 182, 193, 0.3)',
-  [theme.breakpoints.down('sm')]: {
-    padding: '8px',
-    borderRadius: '10px',
-    width: '400px',
-  },
-}));
+    margin: '10px 0',
+    padding: '10px',
+    width: '100%', // Responsive width
+    maxWidth: '900px', // Set a maximum width for large screens
+    background: 'linear-gradient(to right, #ffffff, #f2faff)',
+    borderRadius: '15px',
+    boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)',
+    border: '1px solid rgba(255, 182, 193, 0.3)',
+    [theme.breakpoints.down('sm')]: {
+      padding: '8px',
+      borderRadius: '10px',
+    },
+  }));
 
 const UserDetails = styled(Box)({
   display: 'flex',
