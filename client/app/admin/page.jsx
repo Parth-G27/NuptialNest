@@ -90,9 +90,7 @@ const AllUsers = () => {
                                         Edit
                                     </Button>
                                 </Link>
-                                <a href={`/edit/${review.reviewId}`}>
-                                a tag
-                                </a>
+                                
                                 <Button color="secondary" variant="contained" onClick={() => deleteUserData(review.reviewId)}>
                                     Delete
                                 </Button>

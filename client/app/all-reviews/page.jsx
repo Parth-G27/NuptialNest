@@ -87,7 +87,7 @@ const AllReviews = () => {
           </CardContent>
         </Card>
       ))}
-      <Box sx={{ textAlign: 'center', marginTop: 4 }}>
+      {/* <Box sx={{ textAlign: 'center', marginTop: 4 }}>
         <Button
           variant="outlined"
           sx={{
@@ -101,7 +101,7 @@ const AllReviews = () => {
         >
           SEE ALL ARTICLES
         </Button>
-      </Box>
+      </Box> */}
     </Box>
 
         </>
