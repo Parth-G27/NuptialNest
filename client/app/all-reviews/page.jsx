@@ -113,6 +113,13 @@ const AllReviews = () => {
     setReviews(response.data);
   };
 
+  const slicedReviewText = (review) => {
+    const maxLength = 375; // Maximum review text length
+    return review.user_review.length > maxLength
+      ? review.user_review.substring(0, maxLength) + '...'
+      : review.user_review;
+  };
+
   return (
     <GradientBox>
       <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#1e88e5', fontWeight: 'bold', marginBottom: 2, marginTop: 4 }}>
@@ -140,7 +147,8 @@ const AllReviews = () => {
                 </Box>
               </UserDetails>
 
-              <ReviewText>{review.user_review}</ReviewText>
+              {/* <ReviewText>{reviews.user_review}.slice(0, 375)</ReviewText> */}
+              <ReviewText>{slicedReviewText(review)}</ReviewText>
 
               <Box display="flex" justifyContent="flex-end" alignItems="center">
                 <ReadMoreButton endIcon={<ArrowForward />}>READ MORE</ReadMoreButton>
