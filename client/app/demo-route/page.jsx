@@ -140,7 +140,7 @@ const AllReviews = () => {
                 </Box>
               </UserDetails>
 
-              <ReviewText>"{review.user_review}"</ReviewText>
+              <ReviewText>{review.user_review}</ReviewText>
 
               <Box display="flex" justifyContent="flex-end" alignItems="center">
                 <ReadMoreButton endIcon={<ArrowForward />}>READ MORE</ReadMoreButton>

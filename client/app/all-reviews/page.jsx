@@ -18,13 +18,13 @@ const GradientBox = styled(Box)({
 // StyledCard with full width
 const StyledCard = styled(Card)(({ theme }) => ({
   margin: '10px 0',
+  marginBottom: 32,
   padding: '10px',
-  width: '100%', // Full width
-  maxWidth: '900px', // Limit the width on larger screens
+  width: '100%', 
+  maxWidth: '900px',
   background: 'linear-gradient(to right, #ffffff, #f2faff)',
   borderRadius: '15px',
   boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)',
-  border: '1px solid rgba(255, 182, 193, 0.3)',
   [theme.breakpoints.down('sm')]: {
     padding: '8px',
     borderRadius: '10px',
@@ -140,7 +140,7 @@ const AllReviews = () => {
                 </Box>
               </UserDetails>
 
-              <ReviewText>"{review.user_review}"</ReviewText>
+              <ReviewText>{review.user_review}</ReviewText>
 
               <Box display="flex" justifyContent="flex-end" alignItems="center">
                 <ReadMoreButton endIcon={<ArrowForward />}>READ MORE</ReadMoreButton>
