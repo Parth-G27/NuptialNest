@@ -6,7 +6,7 @@ const AutoIncrement = AutoIncrementFactory(mongoose);
 const reviewSchema = new mongoose.Schema({
     title: { type: String, required: true },
     email: { type: String, required: true },
-    time: { type: Date, default: Date.now },
+    time: { type: String, required: true },  
     category: { type: String, required: true},
     user_review: { type: String, required: true }
 });

@@ -128,22 +128,23 @@ const AllReviews = () => {
       {reviews.map((review, index) => (
         <StyledCard key={index}>
           <Box position="relative">
-            <ReviewButton>Review #{review.reviewId}</ReviewButton>
+            {/* <ReviewButton>Review #{review.reviewId}</ReviewButton> */}
+            <ReviewButton>{review.category}</ReviewButton>
             <CardContent >
               <UserDetails>
-                <Avatar sx={{ bgcolor: '#64b5f6' }}>{review.name.charAt(0).toUpperCase()}</Avatar>
+                <Avatar sx={{ bgcolor: '#64b5f6' }}>{review.email.charAt(0).toUpperCase()}</Avatar>
                 <Box ml={2}>
-                  <UserName>{review.name}</UserName>
-                  {/* <EmailText>
-                    <Email sx={{ fontSize: '16px', marginRight: '5px' }} />
-                    {review.email}
-                  </EmailText> */}
+                  <UserName>{review.title}</UserName>
+                  
                   <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 0.5 }}>
                       <Email fontSize="small" sx={{ color: 'text.secondary', marginRight: 0.5 }} />
                       <Typography variant="body2" color="text.secondary">
                         {review.email}
                       </Typography>
-                    </Box>
+                      <Typography variant="body2" sx={{marginLeft: '5px'}} color="text.secondary">
+                        {review.time}
+                      </Typography>
+                  </Box>
                 </Box>
               </UserDetails>
 

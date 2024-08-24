@@ -105,10 +105,34 @@ const categories = [
   'General Feedback',
 ];
 
+function formatDate(date) {
+  const day = date.getDate();
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const month = monthNames[date.getMonth()];
+  const year = date.getFullYear();
+
+  // Get the appropriate day suffix
+  const daySuffix = getDaySuffix(day);
+
+  return `${day}${daySuffix} ${month} ${year}`;
+}
+
+function getDaySuffix(day) {
+  if (day >= 11 && day <= 13) {
+    return "th";
+  }
+  switch (day % 10) {
+    case 1: return "st";
+    case 2: return "nd";
+    case 3: return "rd";
+    default: return "th";
+  }
+}
+
 const initialValue = {
   title: '',
   email: '',
-  time: new Date(), // Get current time in ISO format
+  time: formatDate(new Date()), // Use the custom date format
   category: '',
   user_review: ''
 };
