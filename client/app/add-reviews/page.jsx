@@ -111,7 +111,6 @@ function formatDate(date) {
   const month = monthNames[date.getMonth()];
   const year = date.getFullYear();
 
-  // Get the appropriate day suffix
   const daySuffix = getDaySuffix(day);
 
   return `${day}${daySuffix} ${month} ${year}`;

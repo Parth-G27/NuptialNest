@@ -22,10 +22,6 @@ app.use(cors(
 ));
 app.use('/', Routes);
 
-
-// app.use(express.json());
-
-
 const PORT = 8000;
 const username = process.env.MONGODB_USERNAME;
 const password = process.env.MONGODB_PWD;

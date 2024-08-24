@@ -19,6 +19,7 @@ router.post('/add', async (req, res) => {
 })
 
 router.get('/all', async (req, res) => {
+
     try {
         const reviews = await Review.find({}).sort({ reviewId: -1 });
         res.status(200).json(reviews)
@@ -32,7 +33,6 @@ router.get('/all', async (req, res) => {
 router.put('/edit', async (req, res) => {
 
     try {
-
         console.log(req.body);
         const updatedReview = req.body;
         const ID = updatedReview.reviewId;
@@ -45,7 +45,7 @@ router.put('/edit', async (req, res) => {
             { $set: { name: newName,
                       email: newEmail,
                       user_review : newUserReview
-             } } // Update operation
+             } } 
          )
         res.status(200).json("Edit working. x2");
 
@@ -64,13 +64,11 @@ router.delete('/del/:id', async (req, res) => {
         if (result.deletedCount === 0) {
             return res.status(404).json({ message: "No review found with the given ID" });
         }
-
         res.status(200).json({ message: "Review deleted successfully" });
 
     } catch (error) {
         res.status(500).json({ message: error.message});
     }
-    
 })
 
 export default router;
