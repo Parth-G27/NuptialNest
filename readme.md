@@ -1,10 +1,10 @@
 # Nuptial Nest
 
 ![Project Status](https://img.shields.io/badge/status-work%20in%20progress-orange)
-![Branch](https://img.shields.io/badge/main-branch-blue)
+[![Branch](https://img.shields.io/badge/master-branch-blue)](https://github.com/Parth-G27/NuptialNest/tree/master?tab=readme-ov-file)
 [![Live Demo](https://img.shields.io/badge/demo-online-brightgreen)](https://nuptial-nest.vercel.app/)
 
-Welcome to **Nuptial Nest**, a work-in-progress project aimed at creating a seamless platform for **one-stop place for all types of Indian Marriage Arrangement serices reviews, ideas and budget with different catagories**. We are currently in the development phase and open-sourcing the project to gather contributions and address existing issues.
+Welcome to **Nuptial Nest**, a work-in-progress project aimed at creating a seamless platform for **one-stop place for all types of Indian Marriage Arrangement services reviews, ideas and budget with different categories**. We are currently in the development phase and open-sourcing the project to gather contributions and address existing issues.
 
 ## Branch Information
 
