@@ -4,8 +4,10 @@ import AutoIncrementFactory from 'mongoose-sequence';
 const AutoIncrement = AutoIncrementFactory(mongoose);
 
 const reviewSchema = new mongoose.Schema({
-    name: { type: String, required: true },
+    title: { type: String, required: true },
     email: { type: String, required: true },
+    time: { type: Date, default: Date.now },
+    category: { type: String, required: true},
     user_review: { type: String, required: true }
 });
 

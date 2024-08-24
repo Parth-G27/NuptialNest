@@ -12,6 +12,10 @@ import {
   Fade,
   ThemeProvider,
   createTheme,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 import { styled } from '@mui/system';
 import { Send as SendIcon, Star as StarIcon } from '@mui/icons-material';
@@ -73,9 +77,39 @@ const StyledRating = styled(Rating)({
   color: '#0062ff', // Use a hardcoded color instead of theme.palette.primary.main
 });
 
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(1),
+}));
+
+const StyledSelect = styled(Select)(({ theme }) => ({
+  borderRadius: 12,
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderColor: 'rgba(0, 0, 0, 0.23)',
+  },
+  '&:hover .MuiOutlinedInput-notchedOutline': {
+    borderColor: theme.palette.primary.main,
+  },
+  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderColor: theme.palette.primary.main,
+  },
+}));
+
+const categories = [
+  'Product Review',
+  'Service Feedback',
+  'Customer Support',
+  'Website Experience',
+  'Feature Request',
+  'Bug Report',
+  'General Feedback',
+];
+
 const initialValue = {
-  name: '',
+  title: '',
   email: '',
+  time: new Date(), // Get current time in ISO format
+  category: '',
   user_review: ''
 };
 
@@ -90,10 +124,6 @@ const AddReview = () => {
     setReview({ ...review, [e.target.name]: e.target.value });
   };
 
-  const handleRatingChange = (event, newValue) => {
-    setReview({ ...review, rating: newValue });
-  };
-
   const addReviewDetails = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -103,22 +133,22 @@ const AddReview = () => {
     setIsSubmitting(false);
     setSnackbarOpen(true);
     router.push('/all-reviews');
+    // console.log(new Date());
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Fade in={true} timeout={1000}>
         <StyledPaper elevation={0}>
-          {/* <GlowEffect /> */}
           <Typography variant="h4" gutterBottom align="center" fontWeight="bold" color="primary">
             Add Review
           </Typography>
           <Form onSubmit={addReviewDetails}>
             <TextField
-              label="Your Name"
+              label="Your Title"
               variant="outlined"
-              name="name"
-              value={review.name}
+              name="title"
+              value={review.title}
               onChange={onValueChange}
               fullWidth
               required
@@ -135,6 +165,26 @@ const AddReview = () => {
               required
               InputProps={{ style: { borderRadius: 12 } }}
             />
+
+            <StyledFormControl fullWidth>
+              <InputLabel id="category-label">Category</InputLabel>
+              <StyledSelect
+                labelId="category-label"
+                id="category"
+                name="category"
+                value={review.category}
+                onChange={onValueChange}
+                label="Category"
+                required
+              >
+                {categories.map((category) => (
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </StyledSelect>
+            </StyledFormControl>
+
             <TextField
               label="Your Review"
               variant="outlined"
@@ -147,19 +197,7 @@ const AddReview = () => {
               required
               InputProps={{ style: { borderRadius: 12 } }}
             />
-            {/* <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <Typography component="legend" color="primary" fontWeight="bold">
-                Your Rating
-              </Typography>
-              <StyledRating
-                name="rating"
-                value={review.rating}
-                onChange={handleRatingChange}
-                precision={0.5}
-                icon={<StarIcon fontSize="inherit" />}
-                emptyIcon={<StarIcon fontSize="inherit" />}
-              />
-            </Box> */}
+
             <SubmitButton
               type="submit"
               variant="contained"

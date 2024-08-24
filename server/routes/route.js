@@ -1,5 +1,4 @@
 import Review from '../models/review.js';
-
 import express, {Router} from 'express';
 
 const router = express.Router();
@@ -20,9 +19,7 @@ router.post('/add', async (req, res) => {
 })
 
 router.get('/all', async (req, res) => {
-
     try {
-
         const reviews = await Review.find({}).sort({ reviewId: -1 });
         res.status(200).json(reviews)
 
