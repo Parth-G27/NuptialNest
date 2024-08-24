@@ -68,8 +68,9 @@ const AllUsers = () => {
             <TableHead>
                 <THead>
                     <TableCell>Id</TableCell>
-                    <TableCell>Name</TableCell>
+                    <TableCell>Title</TableCell>
                     <TableCell>Email</TableCell>
+                    <TableCell>Category</TableCell>
                     <TableCell>Review</TableCell>
                     <TableCell>Actions</TableCell>
                 </THead>
@@ -78,8 +79,9 @@ const AllUsers = () => {
                 {reviews.map((review, index) => (
                     <TRow key={index}>
                         <TableCell>{review.reviewId}</TableCell>
-                        <TableCell>{review.name}</TableCell>
+                        <TableCell>{review.title}</TableCell>
                         <TableCell>{review.email}</TableCell>
+                        <TableCell>{review.category}</TableCell>
                         <TableCell>
                             <ReviewText title={review.user_review}>{review.user_review}</ReviewText>
                         </TableCell>
