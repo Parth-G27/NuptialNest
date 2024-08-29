@@ -1,54 +1,132 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { 
-  Box, Card, CardContent, Typography, Chip, Button, 
-  Avatar, Grid, Divider
-} from '@mui/material';
-import { styled } from '@mui/system';
-import { ArrowForward, Email } from '@mui/icons-material';
+import { Box, Typography, Card, CardContent, Avatar, Button, styled } from '@mui/material';
 import { apiAllReviews } from '../api/apiAllReview/route';
+import { ArrowForward, Email } from '@mui/icons-material';
 
-const StyledCard = styled(Card)({
+// GradientBox styling for background
+const GradientBox = styled(Box)(({ theme }) => ({
+  padding: '20px',
+  background: '#f0f4f8',
+  minHeight: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+  [theme.breakpoints.down('sm')]: {
+    padding: '10px',
+  },
+}));
+
+// StyledCard with full width
+
+
+
+
+
+
+const EmailText = styled(Typography)(({ theme }) => ({
+  fontSize: '14px',
+  color: '#546e7a',
+  marginLeft: '10px',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '12px',
+    marginLeft: '0',
+    marginTop: '5px',
+  },
+}));
+
+const ReviewText = styled(Typography)(({ theme }) => ({
+  fontSize: '16px',
+  color: '#37474f',
+  lineHeight: 1.5,
+  margin: '10px 0',
+  paddingLeft: '12px',
+  borderLeft: '4px solid #2196f3',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '14px',
+    paddingLeft: '8px',
+    margin: '15px 0',
+  },
+}));
+
+const ReadMoreButton = styled(Button)(({ theme }) => ({
+  color: '#1e88e5',
+  fontWeight: 'bold',
+  '&:hover': {
+    backgroundColor: 'transparent',
+    transform: 'translateY(-3px)',
+    transition: '0.2s',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '12px',
+    padding: '6px 10px',
+  },
+}));
+
+//
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  margin: '10px 0',
   marginBottom: 32,
-  borderRadius: 16,
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-  '&:hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)',
+  padding: '10px',
+  width: '100%', 
+  maxWidth: '900px',
+  background: 'linear-gradient(to right, #ffffff, #f2faff)',
+  borderRadius: '15px',
+  boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  [theme.breakpoints.down('sm')]: {
+    padding: '15px',
+    borderRadius: '10px',
+    marginBottom: '20px',
   },
-});
+}));
 
-const StyledChip = styled(Chip)({
-  backgroundColor: '#3f51b5',
-  color: 'white',
+const UserDetails = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'flex-start',
+  marginBottom: '10px',
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+  },
+}));
+
+const UserName = styled(Typography)(({ theme }) => ({
+  fontSize: '18px',
   fontWeight: 'bold',
-  borderRadius: 20,
-  padding: '4px 8px',
-});
-
-const ReviewTypography = styled(Typography)({
-  position: 'relative',
-  paddingLeft: 24,
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    width: 4,
-    backgroundColor: '#ffa726',
-    borderRadius: 4,
+  color: '#0d47a1',
+  marginLeft: '0px',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '16px',
+    marginTop: '10px',
+    marginLeft: '0',
+    paddingRight: '80px', // Make space for the category button
   },
-});
+}));
 
-const ReadMoreButton = styled(Button)({
-  color: '#ffa726',
+const ReviewButton = styled(Button)(({ theme }) => ({
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
+  backgroundColor: '#1e88e5',
+  color: '#fff',
   fontWeight: 'bold',
+  borderRadius: '20px',
+  padding: '5px 15px',
+  fontSize: '12px',
   '&:hover': {
-    backgroundColor: 'rgba(255, 167, 38, 0.1)',
+    backgroundColor: '#1565c0',
   },
-});
+  [theme.breakpoints.down('sm')]: {
+    top: '15px',
+    right: '15px',
+    padding: '3px 10px',
+    fontSize: '10px',
+  },
+}));
 
 const AllReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -58,53 +136,66 @@ const AllReviews = () => {
   }, []);
 
   const getAllReviews = async () => {
-    let response = await apiAllReviews();   
+    let response = await apiAllReviews();
     setReviews(response.data);
-  }
+  };
+
+  const slicedReviewText = (review) => {
+    const maxLength = 375; // Maximum review text length
+    return review.user_review.length > maxLength
+      ? review.user_review.substring(0, maxLength) + '...'
+      : review.user_review;
+  };
 
   return (
-    <Box sx={{ maxWidth: 800, margin: 'auto', padding: 4 }}>
-      <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#3f51b5', fontWeight: 'bold', marginBottom: 4 }}>
+    <GradientBox>
+      <Typography variant="h4" gutterBottom sx={(theme) => ({
+        textAlign: 'center',
+        color: '#1e88e5',
+        fontWeight: 'bold',
+        marginBottom: 2,
+        marginTop: 4,
+        [theme.breakpoints.down('sm')]: {
+          fontSize: '24px',
+          marginTop: 2,
+        },
+      })}>
         All Reviews
       </Typography>
-      <Grid container spacing={4}>
-        {reviews.map((review, index) => (
-          <Grid item xs={12} key={index}>
-            <StyledCard>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
-                  <Avatar sx={{ bgcolor: '#ffa726', marginRight: 2 }}>
-                    {review.name[0]}
-                  </Avatar>
-                  <Box>
-                    <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', color: '#3f51b5' }}>
-                      {review.name}
+      {reviews.map((review, index) => (
+        <StyledCard key={index}>
+          <Box position="relative">
+            <ReviewButton>{review.category}</ReviewButton>
+            <CardContent>
+              <UserDetails>
+                <Avatar sx={{ bgcolor: '#64b5f6', width: 40, height: 40 }}>
+                  {review.email.charAt(0).toUpperCase()}
+                </Avatar>
+                <Box sx={{ flexGrow: 1, ml: { xs: 0, sm: 2 }, mt: { xs: 1, sm: 0 } }}>
+                  <UserName>{review.title}</UserName>
+                  <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 0.5, flexWrap: 'wrap' }}>
+                    <Email fontSize="small" sx={{ color: 'text.secondary', marginRight: 0.5 }} />
+                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '11px', sm: '12px' } }}>
+                      {review.email}
                     </Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 0.5 }}>
-                      <Email fontSize="small" sx={{ color: 'text.secondary', marginRight: 0.5 }} />
-                      <Typography variant="body2" color="text.secondary">
-                        {review.email}
-                      </Typography>
-                    </Box>
+                    <Typography variant="body2" sx={{ marginLeft: '5px', fontSize: { xs: '11px', sm: '12px' } }} color="text.secondary">
+                      {review.time}
+                    </Typography>
                   </Box>
                 </Box>
-                <Divider sx={{ marginY: 2 }} />
-                <ReviewTypography variant="body1" paragraph sx={{ color: 'text.primary', fontStyle: 'italic' }}>
-                  "{review.user_review}"
-                </ReviewTypography>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 2 }}>
-                  <StyledChip label={`Review #${review.reviewId}`} size="small" />
-                  <ReadMoreButton endIcon={<ArrowForward />}>
-                    Read More
-                  </ReadMoreButton>
-                </Box>
-              </CardContent>
-            </StyledCard>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+              </UserDetails>
+
+              <ReviewText>{slicedReviewText(review)}</ReviewText>
+
+              <Box display="flex" justifyContent="flex-end" alignItems="center">
+                <ReadMoreButton endIcon={<ArrowForward />}>READ MORE</ReadMoreButton>
+              </Box>
+            </CardContent>
+          </Box>
+        </StyledCard>
+      ))}
+    </GradientBox>
   );
-}
+};
 
 export default AllReviews;
